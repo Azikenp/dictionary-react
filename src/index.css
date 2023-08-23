@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, #root{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#root{
+    max-width: 1500px;
+}
+
+body, button{
+    font-family: 'Karla', sans-serif;
+}
+
+.sound--btn i{
+    color: rgba(255, 0, 0, 0.326);
+}
+
+.results--sentence{
+    border-left-color: rgba(255, 0, 0, 0.326) ;
+}
+
+.spinner{
+    font-size: 40px;
+    animation: rotate 1s linear infinite;
+}
+
+
+@keyframes rotate{
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
