@@ -1,19 +1,19 @@
 import React from 'react'
 
-function Markup(props) {
-    const word = props.datas.word;
+function Markup({datas, playSound}) {
+    const word = datas.word;
     // const partOfSpeech = props.datas.meanings[0].partOfSpeech;
     // const phonetic = props.datas.phonetic? data.phonetic: ""
     // const meaning = props.datas.meanings[0].definitions[0].definition;
     // const example = props.datas.meanings[0].definitions[0].example || ""
     // sound.setAttribute("src", `${data.phonetics[0].audio}`)
     // console.log(sound);  
-    console.log(props);
+    console.log(datas, playSound);
   return (
     <>
         <div className="results--header flex justify-between">
             <h3 className="text-md font-bold text-gray-700">{word}</h3>
-            <button className="sound--btn" onClick={props.playSound}>
+            <button className="sound--btn" onClick={() => playSound()}>
                 <i className="fa fa-microphone" aria-hidden="true"></i>
             </button>
         </div>
