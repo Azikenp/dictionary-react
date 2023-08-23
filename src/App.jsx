@@ -4,13 +4,13 @@ import Markup from './components/Markup'
 
 function App() {
 
-  const [inputs, setInputs] = useState('wedws');
-  const [word, setWord] = useState('home');
+  const [inputs, setInputs] = useState('');
+  const [word, setWord] = useState('');
 
-
-  useEffect(() => {
-    const getMeaning = async function(word) {
-      let url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+  console.log(word);
+  
+    const getMeaning = async () => {
+      let url = `https://api.dictionaryapi.dev/api/v2/entries/en/${inputs}`
       try {
         const response = await fetch(url);
     
@@ -26,16 +26,15 @@ function App() {
           word.length > 0 ? renderErrorOne()  : renderErrorTwo();
       }
   }
-  }, [])
 
-  const handleChange = () => {
-    setInputs((e) => e.target.value);
-    console.log(inputs);
+  const handleChange = (event) => {
+    event.preventDefault()
+    setInputs(event.target.value);
   }
 
-  const clearView = () => {
-    result.textContent = ""
-  }
+  // const clearView = () => {
+  //   result.textContent = ""
+  // }
 
   const playSound = () => {
     sound.play();
@@ -43,12 +42,13 @@ function App() {
 
   const searchFunction = (e) => {
     e.preventDefault();
-    clearView();
-    renderSpinner();
+    // clearView();
+    // renderSpinner();
+    setWord(inputs)
     setTimeout(() => {
         let searchInput = document.querySelector('input');
-        clearView();
-        getMeaning(searchInput.value);
+        // clearView();
+        getMeaning(word);
         searchInput.value = ""
     }, 500);
   }
@@ -71,8 +71,8 @@ function App() {
             </div>
             <div className="results">
                 <audio id="sound"></audio>
-                {inputs.length > 0 
-                ? <Markup playSound={playSound} />
+                {word.length > 0 
+                ? <Markup word={word} playSound={playSound} />
                 : <div className="text-center">
                     <p className="text-gray-400">Enter a word to begin search.</p>
                   </div>  
