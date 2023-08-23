@@ -9,7 +9,25 @@ function App() {
 
   console.log(word);
 
-    const getMeaning = async (inputs) => {
+  const renderErrorOne = () => {
+    return(
+      <div class="error  text-center py-8">
+        <p class="text-red-400">Ooops!!! <br /> We could't find that word, please try searching for another word.</p>
+      </div>
+    )
+            
+  }
+
+  //second error message
+  const renderErrorTwo = () => {
+      return(
+        <div class="error  text-center py-8">
+            <p class="text-red-400">Please enter a word!</p>
+        </div>
+      )
+  }
+
+    const getMeaning = async () => {
       let url = `https://api.dictionaryapi.dev/api/v2/entries/en/${inputs}`
       try {
         const response = await fetch(url);
@@ -44,7 +62,7 @@ function App() {
     e.preventDefault();
     // clearView();
     // renderSpinner();
-    setWord(inputs)
+    getMeaning()
     // setTimeout(() => {
     //   setWord(inputs)
     //     // clearView();

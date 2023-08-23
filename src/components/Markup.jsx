@@ -8,7 +8,7 @@ function Markup(props) {
     // const example = props.datas.meanings[0].definitions[0].example || ""
     // sound.setAttribute("src", `${data.phonetics[0].audio}`)
     // console.log(sound);  
-
+    console.log(props);
   return (
     <>
         <div className="results--header flex justify-between">
