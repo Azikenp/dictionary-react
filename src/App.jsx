@@ -4,8 +4,9 @@ import Markup from './components/Markup'
 
 function App() {
 
-  const [input, setInput] = useState('');
+  const [inputs, setInputs] = useState('');
   const [word, setWord] = useState('home');
+  console.log(inputs.length);
 
 
   useEffect(() => {
@@ -19,7 +20,7 @@ function App() {
         }
     
         const data = await response.json();
-        setInput(data)
+        setInputs(data)
       } 
       catch (error) {
           //conditionally render an error message  based on the type of error
@@ -60,9 +61,12 @@ function App() {
             </div>
             <div class="results">
                 <audio id="sound"></audio>
-                <div class="text-center">
+                {inputs.length > 0 
+                ? <Markup />
+                : <div class="text-center">
                     <p class="text-gray-400">Enter a word to begin search.</p>
-                </div>
+                  </div>  
+                }
             </div>
         </section>
       </div>
