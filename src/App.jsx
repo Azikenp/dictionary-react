@@ -8,8 +8,8 @@ function App() {
   const [word, setWord] = useState('');
 
   console.log(word);
-  
-    const getMeaning = async () => {
+
+    const getMeaning = async (inputs) => {
       let url = `https://api.dictionaryapi.dev/api/v2/entries/en/${inputs}`
       try {
         const response = await fetch(url);
@@ -19,7 +19,7 @@ function App() {
         }
     
         const data = await response.json();
-        setWord(data)
+        setWord(data[0])
       } 
       catch (error) {
           //conditionally render an error message  based on the type of error
@@ -45,12 +45,12 @@ function App() {
     // clearView();
     // renderSpinner();
     setWord(inputs)
-    setTimeout(() => {
-        let searchInput = document.querySelector('input');
-        // clearView();
-        getMeaning(word);
-        searchInput.value = ""
-    }, 500);
+    // setTimeout(() => {
+    //   setWord(inputs)
+    //     // clearView();
+    //     getMeaning(inputs);
+    //     // setInputs('')
+    // }, 500);
   }
 
   return (
@@ -72,7 +72,7 @@ function App() {
             <div className="results">
                 <audio id="sound"></audio>
                 {word.length > 0 
-                ? <Markup word={word} playSound={playSound} />
+                ? <Markup datas={word} playSound={playSound} />
                 : <div className="text-center">
                     <p className="text-gray-400">Enter a word to begin search.</p>
                   </div>  
