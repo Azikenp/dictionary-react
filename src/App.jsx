@@ -4,9 +4,8 @@ import Markup from './components/Markup'
 
 function App() {
 
-  const [inputs, setInputs] = useState('');
+  const [inputs, setInputs] = useState('wedws');
   const [word, setWord] = useState('home');
-  console.log(inputs.length);
 
 
   useEffect(() => {
@@ -20,7 +19,7 @@ function App() {
         }
     
         const data = await response.json();
-        setInputs(data)
+        setWord(data)
       } 
       catch (error) {
           //conditionally render an error message  based on the type of error
@@ -29,13 +28,18 @@ function App() {
   }
   }, [])
 
+  const handleChange = () => {
+    setInputs((e) => e.target.value);
+    console.log(inputs);
+  }
+
   const clearView = () => {
     result.textContent = ""
   }
 
   const playSound = () => {
     sound.play();
-}
+  }
 
   const searchFunction = (e) => {
     e.preventDefault();
@@ -51,20 +55,26 @@ function App() {
 
   return (
     <>
-      <div class="container bg-gray-100 h-screen w-screen flex items-center justify-center min-w-full">
-        <section class="bg-white p-8 rounded shadow-lg w-width">
-            <div class="form">
-                <form class="flex justify-between mb-10">
-                    <input type="text" class="outline-none border-b-2 border-b-red-200 w-44" />
-                    <button onClick={searchFunction} class="search bg-red-200 rounded px-10 py-2 text-black font-bold">Search</button>
+      <div className="container bg-gray-100 h-screen w-screen flex items-center justify-center min-w-full">
+        <section className="bg-white p-8 rounded shadow-lg w-width">
+            <div className="form">
+                <form className="flex justify-between mb-10">
+                    <input 
+                      name='search' 
+                      value={inputs} 
+                      onChange={handleChange}
+                      type="text" 
+                      className="outline-none border-b-2 border-b-red-200 w-44" 
+                    />
+                    <button onClick={searchFunction} className="search bg-red-200 rounded px-10 py-2 text-black font-bold">Search</button>
                 </form>
             </div>
-            <div class="results">
+            <div className="results">
                 <audio id="sound"></audio>
                 {inputs.length > 0 
-                ? <Markup />
-                : <div class="text-center">
-                    <p class="text-gray-400">Enter a word to begin search.</p>
+                ? <Markup playSound={playSound} />
+                : <div className="text-center">
+                    <p className="text-gray-400">Enter a word to begin search.</p>
                   </div>  
                 }
             </div>
