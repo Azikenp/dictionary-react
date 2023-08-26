@@ -2,13 +2,13 @@ import React from 'react'
 
 function Markup({datas, playSound}) {
     const word = datas.word;
-    // const partOfSpeech = props.datas.meanings[0].partOfSpeech;
-    // const phonetic = props.datas.phonetic? data.phonetic: ""
-    // const meaning = props.datas.meanings[0].definitions[0].definition;
-    // const example = props.datas.meanings[0].definitions[0].example || ""
+    const partOfSpeech = datas.meanings[0].partOfSpeech;
+    const phonetic = datas.phonetic? datas.phonetic: ""
+    const meaning = datas.meanings[0].definitions[0].definition;
+    const example = datas.meanings[0].definitions[0].example || ""
     // sound.setAttribute("src", `${data.phonetics[0].audio}`)
-    // console.log(sound);  
-    console.log(datas, playSound);
+    // // console.log(sound);  
+    // console.log(datas, playSound);
   return (
     <>
         <div className="results--header flex justify-between">
@@ -18,14 +18,14 @@ function Markup({datas, playSound}) {
             </button>
         </div>
         <div className="part--of--speech text-sm text-gray-400 flex mb-8">
-            <p className="mr-2">partOfSpeech</p>
-            <span>phonetic</span>
+            <p className="mr-2">{partOfSpeech}</p>
+            <span>{phonetic}</span>
         </div>
-        <div className="results--definition text-gray-600 mb-4">
-            <p>meaning</p>
+        <div className="results--definition text-gray-600 mb-4 text-left">
+            <p>{meaning}</p>
         </div>
-        <div className="results--sentence border-l-4 pl-2 pr-12">
-            <p>example </p>
+        <div className="results--sentence border-l-4 pl-2 pr-12 text-left">
+            <p>{example} </p>
         </div>
     </>
   )

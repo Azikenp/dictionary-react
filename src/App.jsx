@@ -4,59 +4,30 @@ import Markup from './components/Markup'
 
 function App() {
 
-  const [inputs, setInputs] = useState('');
-  const [word, setWord] = useState('');
+  const [inputs, setInputs] = useState('rat');
+  const [word, setWord] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${inputs}`)
+    .then(res => res.json())
+    .then(data => setWord(data[0]))
+    .catch(err => console.error(`haaaa ${err}`))
+  }, []);
 
   console.log(word);
 
-  const renderErrorOne = () => {
-    return(
-      <div class="error  text-center py-8">
-        <p class="text-red-400">Ooops!!! <br /> We could't find that word, please try searching for another word.</p>
-      </div>
-    )
-            
-  }
-
-  //second error message
-  const renderErrorTwo = () => {
-      return(
-        <div class="error  text-center py-8">
-            <p class="text-red-400">Please enter a word!</p>
-        </div>
-      )
-  }
-
-    const getMeaning = async () => {
-      let url = `https://api.dictionaryapi.dev/api/v2/entries/en/${inputs}`
-      try {
-        const response = await fetch(url);
-    
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-    
-        const data = await response.json();
-        setWord(data[0])
-      } 
-      catch (error) {
-          //conditionally render an error message  based on the type of error
-          word.length > 0 ? renderErrorOne()  : renderErrorTwo();
-      }
-  }
+  function getMeaning(){
+    const meaning = word;
+    setWord(meaning)
+  };
 
   const handleChange = (event) => {
     event.preventDefault()
     setInputs(event.target.value);
-  }
-
-  // const clearView = () => {
-  //   result.textContent = ""
-  // }
-
+  };
   const playSound = () => {
     sound.play();
-  }
+  };
 
   const searchFunction = (e) => {
     e.preventDefault();
