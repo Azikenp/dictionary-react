@@ -12,9 +12,11 @@ function App() {
     )
       .then((response) => response.json())
       .then((data) => {
-        return setWord(data[0]);
+        setWord(data[0]);
       })
-      .catch((err) => console.error(`haaaa ${err}`));
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const searchFunction = (e) => {
