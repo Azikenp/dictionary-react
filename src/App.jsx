@@ -3,25 +3,28 @@ import "./App.css";
 import Markup from "./components/Markup";
 
 function App() {
-  const [search, setSearch] = useState('');
-  const [word, setWord] = useState('');
+  const [search, setSearch] = useState("");
+  const [word, setWord] = useState("");
 
   const searchResults = (inputValue) => {
-    return fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${inputValue}`)
+    return fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${inputValue}`
+    )
       .then((response) => response.json())
       .then((data) => {
-        return setWord(data[0])
+        return setWord(data[0]);
       })
       .catch((err) => console.error(`haaaa ${err}`));
   };
 
-
   const searchFunction = (e) => {
     e.preventDefault();
-    searchResults(search)
+    searchResults(search);
   };
 
-  console.log(word);
+  const playSound = () => {
+    document.getElementById("sound").play();
+  };
 
   return (
     <>
@@ -46,13 +49,13 @@ function App() {
           </div>
           <div className="results">
             <audio id="sound"></audio>
-            {word ? 
-              <Markup data={word}/>
-             : 
+            {word ? (
+              <Markup data={word} playSound={playSound} />
+            ) : (
               <div className="text-center">
                 <p className="text-gray-400">Enter a word to begin search.</p>
               </div>
-            }
+            )}
           </div>
         </section>
       </div>
